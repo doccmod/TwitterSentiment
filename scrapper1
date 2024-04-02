@@ -1,0 +1,53 @@
+import requests
+import json
+from pathlib import Path
+from requests_oauthlib import OAuth1
+
+# Twitter API credentials
+consumer_key = "m4zw6oS5Vom1WsYe3xrrr2a6H"
+consumer_secret = "3LYGfAb79TiH7pnt8A9CiE1Qx9bSLT4XhKjeeaiXFjI8dXNmny"
+access_token = "1239909118296678400-7yin9QAs6yGSToP3FWE5We3jBoiWD8"
+access_token_secret = "xzYJn1zq8z0iTtjW2pRR5PW1I3G09lfpHdamTjo7uNvu3"
+query = "python"
+
+
+def get_tweets(query, tweet_count):
+    auth = OAuth1(consumer_key, consumer_secret, access_token, access_token_secret)
+    url = f"https://api.twitter.com/1.1/search/tweets.json?q={query}&count={tweet_count}"
+    response = requests.get(url, auth=auth)
+    if response.status_code != 200:
+        print(f"Request returned an error: {response.status_code} {response.text}")
+        return None
+    return response.json()
+
+
+def analyze_tweets(tweets):
+    if tweets is not None and 'data' in tweets:
+        for tweet in tweets['data']:
+            tweet_text = tweet['text']
+            tweet_id = tweet['id']
+            sentiment = get_tweet_sentiment(tweet_text)
+            print(f"Tweet ID: {tweet_id}\nTweet: {tweet_text}\nSentiment: {sentiment}\n")
+    else:
+        print("No tweets found or an error occurred.")
+
+# Function to get sentiment analysis of a tweet using Twitter's AI
+def get_tweet_sentiment(tweet_text):
+    auth = OAuth1(consumer_key, consumer_secret, access_token, access_token_secret)
+    headers = {"Content-Type": "application/json"}
+    data = {"text": tweet_text}
+    url = "https://api.twitter.com/labs/2/tweets/sentiment"
+    response = requests.post(url, headers=headers, data=json.dumps(data), auth=auth)
+    if response.status_code != 200:
+        print(f"Request returned an error: {response.status_code} {response.text}")
+        return None
+    sentiment = response.json()['data']['sentiment']
+    return sentiment
+
+def main():
+    tweet_count = 100
+    tweets = get_tweets(query, tweet_count)
+    analyze_tweets(tweets)
+
+if __name__ == "__main__":
+    main()
