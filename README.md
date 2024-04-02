@@ -3,6 +3,8 @@ Does twitter sentiment analysis correlate to stock prices
 
 ## Requirements
 - Python 3.9-3.11 (https://www.python.org/downloads/release/python-3118/)  
+- pip requirements. Do:  
+    ```pip install -r requirements.txt```
 - If using a GPU: 
     - an NVIDIA graphics card
     - CUDA Toolkit 12.3 (https://developer.nvidia.com/cuda-12-3-0-download-archive)
