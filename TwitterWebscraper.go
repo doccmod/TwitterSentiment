@@ -29,7 +29,7 @@ func main() {
 		panic(err)
 	}
 
-	for tweet := range scraper.SearchTweets(context.Background(), "twitter scraper data -filter:retweets", 50) {
+	for tweet := range scraper.SearchTweets(context.Background(), "tesla", 50) {
 		if tweet.Error != nil {
 			panic(tweet.Error)
 		}
