@@ -8,7 +8,8 @@ Does twitter sentiment analysis correlate to stock prices
 - If using a GPU: 
     - an NVIDIA graphics card
     - CUDA Toolkit 12.3 (https://developer.nvidia.com/cuda-12-3-0-download-archive)
-    - cuDDN SDK 8.6.0 (https://developer.nvidia.com/rdp/cudnn-archive)
+    - cuDNN SDK 8.9.0 (https://developer.nvidia.com/rdp/cudnn-archive) 
+    - See link for installing cuDNN (https://docs.nvidia.com/deeplearning/cudnn/archives/cudnn-896/install-guide/)
 
 ## Notes:
 See notes in code. All of them are listed here for easy conversion to GitHub issues
