@@ -7,8 +7,9 @@ Does twitter sentiment analysis correlate to stock prices
     ```pip install -r requirements.txt```
 - If using a GPU: 
     - an NVIDIA graphics card
-    - CUDA Toolkit 12.3 (https://developer.nvidia.com/cuda-12-3-0-download-archive)
-    - cuDNN SDK 8.9.0 (https://developer.nvidia.com/rdp/cudnn-archive) 
+    - TensorFlow<2.11
+    - CUDA Toolkit 11.2 (https://developer.nvidia.com/cuda-11.2.0-download-archive)
+    - cuDNN SDK 8.1.0 (https://developer.nvidia.com/rdp/cudnn-archive) 
     - See link for installing cuDNN (https://docs.nvidia.com/deeplearning/cudnn/archives/cudnn-896/install-guide/)
 
 ## Notes:
