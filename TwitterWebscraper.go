@@ -8,6 +8,7 @@ import (
 	"log"
 	"os"
 	"os/exec"
+	"time"
 
 	// other imports...
 
@@ -35,11 +36,12 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+
 	// Define your search query and the number of tweets you wish to analyze
 	query := "AAPL OR Apple OR #AAPLStock"
-	limit := 20
+	limit := 10
 
-	// Create a CSV writer writing to stdout
+	// Create a CSV writer writing to a file
 	file, err := os.Create("output.csv")
 	if err != nil {
 		log.Fatalln("Failed to open file", err)
@@ -49,8 +51,8 @@ func main() {
 	writer := csv.NewWriter(file)
 	defer writer.Flush()
 
-	// Write header
-	err = writer.Write([]string{"Tweet", "Sentiment"})
+	// Updated to include "Date" in the header
+	err = writer.Write([]string{"Tweet", "Sentiment", "Date"})
 	if err != nil {
 		log.Fatalln("Error writing record to csv:", err)
 	}
@@ -68,8 +70,11 @@ func main() {
 			continue // Skip this tweet if there's an error
 		}
 
-		// Write tweet text and sentiment to CSV
-		err = writer.Write([]string{tweet.Text, sentiment})
+		// Format tweet's date
+		tweetDate := tweet.TimeParsed.Format(time.RFC3339) // Ensure you have the correct property for tweet's date
+
+		// Write tweet text, sentiment, and date to CSV
+		err = writer.Write([]string{tweet.Text, sentiment, tweetDate})
 		if err != nil {
 			log.Fatalln("Error writing record to csv:", err)
 		}
